@@ -9,6 +9,12 @@ function Detail() {
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
     const [subDescription, setSubDescription] = useState('')
+    const [comment, setComment] = useState('')
+    const [Comments, setComments] = useState([] as any)
+
+    const onChangeComment = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
+        setComment(e.target.value)
+    },[])
 
     const onChangePrice = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
         setPrice(e.target.value)
@@ -40,6 +46,24 @@ function Detail() {
         })
     },[price, description, subDescription])
     
+    const onPostCommentAdd = useCallback((e:React.FormEvent) => {
+        e.preventDefault()
+
+        const Data = {
+            id: `${params.title}`,
+            comment: comment
+        }
+
+        axios.post(`http://localhost:8001/comment/${params.title}/comment`, Data)
+        .then((response) => {
+            alert('댓글게시 성공')
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+    },[comment])
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -48,6 +72,8 @@ function Detail() {
         }
         fetchData()
     } , [])
+
+    console.log(data)
 
     const onDeleteButton = () => {
         async function DeleteData() {
@@ -68,6 +94,9 @@ function Detail() {
     <input name='price' type='text' onChange={onChangePrice} tabIndex={4}/>
     <button type="submit" onClick={onPostModifySubmit}>게시</button>
             </div>
+
+<input name="comment" type="text" value={comment} onChange={onChangeComment} />
+<button type="submit" onClick={onPostCommentAdd}>댓글 게시</button>
         </div>
     )
 }
