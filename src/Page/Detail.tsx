@@ -10,7 +10,6 @@ function Detail() {
     const [description, setDescription] = useState('')
     const [subDescription, setSubDescription] = useState('')
     const [comment, setComment] = useState('')
-    const [Comments, setComments] = useState([] as any)
 
     const onChangeComment = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
         setComment(e.target.value)
@@ -63,8 +62,6 @@ function Detail() {
         })
     },[comment])
 
-
-
     useEffect(() => {
         async function fetchData() {
             const res = await axios(`http://localhost:8001/post/${params.title}`)
@@ -73,8 +70,6 @@ function Detail() {
         fetchData()
     } , [])
 
-    console.log(data)
-
     const onDeleteButton = () => {
         async function DeleteData() {
             await axios.delete(`http://localhost:8001/post/${params.title}`)
@@ -82,10 +77,18 @@ function Detail() {
         DeleteData()
     }
 
+    
         return (
         <div>
             <p>{data.id}</p>
             <p>{data.title}</p>
+            {data.Comments && data.Comments.map((dataT:any) => {
+                return (
+                    <div key={dataT.commenter}>
+                        <p>{dataT.comment}</p>
+                    </div>
+                )
+            })}
             <button onClick={onDeleteButton}>삭제</button>
 
             <div>
@@ -94,6 +97,8 @@ function Detail() {
     <input name='price' type='text' onChange={onChangePrice} tabIndex={4}/>
     <button type="submit" onClick={onPostModifySubmit}>게시</button>
             </div>
+
+
 
 <input name="comment" type="text" value={comment} onChange={onChangeComment} />
 <button type="submit" onClick={onPostCommentAdd}>댓글 게시</button>
