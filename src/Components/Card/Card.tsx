@@ -46,6 +46,7 @@ display: flex;
 flex-direction: column;
 border: 1px solid #dbdbdb;
 border-radius: 5px;
+margin-top: 50px;
 width: 400px;
 height: 100px;
 `;
