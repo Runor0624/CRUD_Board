@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { Container,Title,Input,Label,Button,LoginText } from "style/SignUp";
 import Swal from "sweetalert2";
+
 
 function SignUp() {
     const navigate = useNavigate()
@@ -65,56 +66,4 @@ function SignUp() {
         </Container>
     )
 }
-
-const Title = styled.h1`
-font-size: 25px;
-font-weight: bold;
-text-align: center;
-padding-top: 20px;
-`;
-
-const Container = styled.div`
-display: flex;
-flex-direction: column;
-margin: auto;
-margin-top: 10vh;
-width: 400px;
-height: 450px;
-border: 1px solid #dbdbdb;
-border-radius: 5px;
-`;
-
-const Label = styled.label`
-font-size: 16px;
-font-weight: bold;
-padding-left: 15px;
-padding-top: 10px;
-padding-bottom: 15px;
-`;
-
-const Input = styled.input`
-width: 350px;
-height: 25px;
-border-radius: 5px;
-align-self: center;
-`;
-
-const Button = styled.button`
-width: 150px;
-height: 45px;
-align-self: center;
-margin-top: 20px;
-background-color: inherit;
-border-radius: 5px;
-cursor: pointer;
-`;
-
-const LoginText = styled.p`
-text-align: center;
-color: #dbdbdb;
-font-weight: bold;
-font-size: 14px;
-padding-top: 10px;
-cursor: pointer;
-`;
 export default SignUp 
