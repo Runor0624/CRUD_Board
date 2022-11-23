@@ -2,8 +2,8 @@ import { faker } from "@faker-js/faker"
 import axios from "axios"
 import React, { useState, useEffect } from "react"
 import {  useNavigate } from "react-router-dom"
-import styled from "styled-components"
 import {AiOutlineDelete} from 'react-icons/ai'
+import { Container,MainContainer,Image,Title,Text,SearchInput } from "style/Card"
 
 interface ITypes {
     id: number;
@@ -74,49 +74,4 @@ function Card() {
 </>
     )
 }
-
-const MainContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(3,1fr);
-`;
-
-
-const Container = styled.div`
-border: 1px solid #dbdbdb;
-border-radius: 5px;
-margin-top: 10px;
-margin-left: 40px;
-width: 400px;
-height: 350px;
-`;
-
-const Image = styled.img`
-width: 380px;
-height: 200px;
-padding-left: 10px;
-padding-top: 10px;
-`;
-
-const Title = styled.h1`
-padding-top: 10px;
-padding-bottom: 10px;
-padding-left: 10px;
-font-size: 20px;
-font-weight: bold;
-`;
-
-const Text = styled.p`
-padding-top: 10px;
-padding-left: 10px;
-padding-bottom: 5px;
-font-size: 15px;
-`;
-
-const SearchInput = styled.input`
-width: 900px;
-height: 30px;
-border: 1px solid #dbdbdb;
-border-radius: 5px;
-margin: 15px 0 0 35px;
-`;
 export default Card 
