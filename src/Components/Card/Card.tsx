@@ -11,6 +11,7 @@ interface ITypes {
     subDescription: string;
     description: string;
     price: string;
+    Discount: string;
 }
 
 function Card() {
@@ -46,7 +47,7 @@ function Card() {
 <>
 
 <SearchInput placeholder="검색어를 입력하세요" value={search} onChange={onChange} />
-<AiOutlineDelete onClick={onReset} style={{fontSize: '15px', cursor:'pointer', position:'absolute', top:'355px', right:'520px'}} />
+<AiOutlineDelete onClick={onReset} style={{fontSize: '15px', cursor:'pointer', position:'absolute', top:'315px', right:'520px'}} />
 
 <MainContainer>
 {search.length > 1 ? TitleFilter.map(data => (
@@ -56,6 +57,7 @@ function Card() {
     <Text>{data.description}</Text>
     <Text>{data.subDescription}</Text>
     <Text>가격 : {[data.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+    <Text>회원가 : {[data.Discount].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
   </Container>
 )):<></>}
 
@@ -67,6 +69,8 @@ function Card() {
             <Text>{datas.description}</Text>
             <Text>{datas.subDescription}</Text>
             <Text>가격 : {[datas.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
+            <Text>회원가 : {[datas.Discount].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
+
           </Container>
         )
       }):<></>}

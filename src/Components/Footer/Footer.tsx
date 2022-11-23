@@ -19,5 +19,9 @@ flex-direction: column;
 padding-top: 10px;
 position: fixed;
 bottom: 0px;
+
+p {
+    text-align: center;
+}
 `;
 export default Footer

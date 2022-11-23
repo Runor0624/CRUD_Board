@@ -20,25 +20,26 @@ const Slick = () => {
     }
 
     return (
-        <div>
+        <Container>
             <Slider {...settings}>
                 <Image src={Image1} alt="1" />
-              
                 <Image src={Image2} alt="2" />
-              
                 <Image src={Image3} alt="3" />
-              <a href="https://www.google.co.kr">
                 <Image src={Image4} alt="4" style={{height:'300px', width:'1400px'}}/>
-                </a>
             </Slider>
-        </div>
+        </Container>
     )
 }
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+margin-top: 50px;
+`;
 
 const Image = styled.img`
-padding-top: 60px;
 padding-left: 40px;
 padding-right: 40px;
 width: 600px;
+height: 300px;
 `;
 export default Slick

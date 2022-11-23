@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useCallback } from "react";
 import { Container, Label, Input, Button } from "style/PostAddModal";
+import Swal from "sweetalert2";
 
 
 function PostAddModal () {
@@ -8,6 +9,7 @@ function PostAddModal () {
     const [description , setDescription] = useState('')
     const [subDescription, setSubDescription] = useState('')
     const [price, setPrice] = useState('')
+    const [Discount, setDiscount] = useState('')
 
     const onChangeTitle = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
@@ -25,6 +27,10 @@ function PostAddModal () {
         setPrice(e.target.value)
     },[])
 
+    const onChangeDiscount = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
+        setDiscount(e.target.value)
+    }, [])
+
     const onSubmit = useCallback((e:React.FormEvent) => {
         e.preventDefault()
         axios.post(`http://localhost:8001/post`, {
@@ -34,17 +40,24 @@ function PostAddModal () {
             title,
             price,
             description,
-            subDescription
+            subDescription,
+            Discount
         })
         .then((res) => {
-            alert('작성완료!')
+            Swal.fire({
+                title: '게시글 작성을 성공했어요!',
+            timer: 3000
+            })
             window.location.replace(`/`)
         })
         .catch((error) => {
             console.error(error)
-            alert('작성 실패')
+            Swal.fire({
+                title: '글 작성에 실패했어요!',
+                timer:2000
+            })
         })
-    },[title,price,description,subDescription])
+    },[title,price,description,Discount,subDescription])
 
     return (
 <Container>
@@ -59,6 +72,9 @@ function PostAddModal () {
     
     <Label>가격</Label>
     <Input name='price' type='number' onChange={onChnagePrice} tabIndex={4}/>
+
+    <Label>할인가</Label>
+    <Input name="Discount" type="text" onChange={onChangeDiscount} tabIndex={5} />
     <Button type="submit" onClick={onSubmit}>게시</Button>
 </Container>
     )

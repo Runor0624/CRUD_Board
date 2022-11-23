@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import {AiOutlineDelete, AiTwotoneEdit} from 'react-icons/ai'
 import { faker } from "@faker-js/faker"
 import { Container,Image,Title,Text,PriceText,PriceBox,ModifyContainer,CommentAddButton,CommentInput,CommentText,CommentTextTitle } from "style/Detail"
+import Swal from "sweetalert2"
 
 function Detail() {
     const params = useParams()
@@ -52,7 +53,10 @@ function Detail() {
             subDescription
         })
         .then((res) => {
-            alert('수정이 완료되었습니다!')
+            Swal.fire({
+                title: '수정을 성공했어요!',
+            timer: 3000
+            })
             window.location.replace(`/${params.title}`)
         })
         .then((error) => {
@@ -70,7 +74,11 @@ function Detail() {
 
         axios.post(`http://localhost:8001/comment/${params.title}/comment`, Data)
         .then((response) => {
-            alert('댓글게시 성공')
+            Swal.fire({
+                title: '댓글 작성을 성공했어요!',
+            timer: 3000
+            })
+             window.location.replace(`/${params.title}`)
         })
         .catch((error) => {
             console.error(error)
@@ -94,7 +102,10 @@ function Detail() {
             await axios.delete(`http://localhost:8001/post/${params.title}`)
         }
         DeleteData()
-        alert('삭제가 완료되었어요!')
+        Swal.fire({
+            title: '삭제를 성공했어요!',
+        timer: 3000
+        })
         window.location.replace(`/`)
     }
 

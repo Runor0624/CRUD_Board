@@ -8,10 +8,10 @@ grid-template-columns: repeat(3,1fr);
 export const Container = styled.div`
 border: 1px solid #dbdbdb;
 border-radius: 5px;
-margin-top: 10px;
+margin-top: 7px;
 margin-left: 40px;
 width: 400px;
-height: 350px;
+height: 380px;
 `;
 
 export const Image = styled.img`
@@ -32,7 +32,7 @@ font-weight: bold;
 export const Text = styled.p`
 padding-top: 10px;
 padding-left: 10px;
-padding-bottom: 5px;
+padding-bottom: 1px;
 font-size: 15px;
 `;
 
@@ -41,5 +41,5 @@ width: 900px;
 height: 30px;
 border: 1px solid #dbdbdb;
 border-radius: 5px;
-margin: 15px 0 0 35px;
+margin: 5px 0 0 35px;
 `;
