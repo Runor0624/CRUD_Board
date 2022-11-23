@@ -15,8 +15,8 @@ function Router() {
     return (
         <>
         <GlobalStyle />
-        <Header />
         <BrowserRouter>
+        <Header />
         <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/:title' element={<DetailPage />} />

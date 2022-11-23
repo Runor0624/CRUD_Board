@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Header() {
+    const navigate = useNavigate()
+
+    const goToMain = () => {
+        navigate('/')
+    }
     return (
         <Container>
-            <Logo>Header</Logo>
+            <Logo onClick={goToMain}>Header</Logo>
         </Container>
     )
 }

@@ -1,7 +1,9 @@
+import { faker } from "@faker-js/faker"
 import axios from "axios"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {  useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import {AiOutlineDelete} from 'react-icons/ai'
 
 interface ITypes {
     id: number;
@@ -14,7 +16,7 @@ interface ITypes {
 function Card() {
     const navigate = useNavigate()
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState<ITypes[]>([])
 
     useEffect(() => {
         async function fetchData() {
@@ -24,30 +26,97 @@ function Card() {
           fetchData()
     } , [])
 
-   
+    const [search, setSearch] = useState("")
 
+    const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+      setSearch(e.target.value)
+    }
+
+    const onReset = (e:React.MouseEvent) => {
+      setSearch("")
+    }
+
+    const TitleFilter = data.filter((PostFilteringData) => {
+      return (
+        PostFilteringData.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      )
+    })
+    
     return (
 <>
-{data.map((datas:ITypes) => {
+
+<SearchInput placeholder="검색어를 입력하세요" value={search} onChange={onChange} />
+<AiOutlineDelete onClick={onReset} style={{fontSize: '15px', cursor:'pointer', position:'absolute', top:'355px', right:'520px'}} />
+
+<MainContainer>
+{search.length > 1 ? TitleFilter.map(data => (
+  <Container key={data.id} onClick={() => navigate(`/${data.title}`)}>
+    <Image src={faker.image.city()} alt="Cards" />
+    <Title>{data.title}</Title>
+    <Text>{data.description}</Text>
+    <Text>{data.subDescription}</Text>
+    <Text>가격 : {[data.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+  </Container>
+)):<></>}
+
+{search.length === 0 ? data.map((datas:ITypes) => {
         return (
           <Container key={datas.id} onClick={() => navigate(`/${datas.title}`)}>
-              {datas.title}
-            <p>{datas.price}</p>
-            <p>{datas.id}</p>
+            <Image src={faker.image.city()} alt="Card" />
+            <Title>{datas.title}</Title>
+            <Text>{datas.description}</Text>
+            <Text>{datas.subDescription}</Text>
+            <Text>가격 : {[datas.price].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
           </Container>
         )
-      })}
+      }):<></>}
+      </MainContainer>
 </>
     )
 }
 
+const MainContainer = styled.div`
+display: grid;
+grid-template-columns: repeat(3,1fr);
+`;
+
+
 const Container = styled.div`
-display: flex;
-flex-direction: column;
 border: 1px solid #dbdbdb;
 border-radius: 5px;
-margin-top: 50px;
+margin-top: 10px;
+margin-left: 40px;
 width: 400px;
-height: 100px;
+height: 350px;
+`;
+
+const Image = styled.img`
+width: 380px;
+height: 200px;
+padding-left: 10px;
+padding-top: 10px;
+`;
+
+const Title = styled.h1`
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+font-size: 20px;
+font-weight: bold;
+`;
+
+const Text = styled.p`
+padding-top: 10px;
+padding-left: 10px;
+padding-bottom: 5px;
+font-size: 15px;
+`;
+
+const SearchInput = styled.input`
+width: 900px;
+height: 30px;
+border: 1px solid #dbdbdb;
+border-radius: 5px;
+margin: 15px 0 0 35px;
 `;
 export default Card 
