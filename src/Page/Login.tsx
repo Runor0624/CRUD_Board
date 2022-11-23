@@ -67,7 +67,7 @@ function Login() {
             <LoginInfoBox>
             <Label>이메일 </Label>
             <Input name="email" type="email" onChange={onChangeEmail} tabIndex={1} placeholder="이메일을 입력해주세요"/>
-            <AiOutlineEye onClick={toggleHidePassword} style={{position:'absolute', top:'330px', left:'700px', cursor:'pointer'}}/>
+            <AiOutlineEye onClick={toggleHidePassword} style={{position:'absolute', top:'360px', left:'800px', cursor:'pointer'}}/>
             {email.length && email.includes('@') ? <></> : <LoginInfoText>Email에는 @가 들어가야 합니다.</LoginInfoText>}
 
             <Label>비밀번호</Label>
