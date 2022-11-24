@@ -16,16 +16,7 @@ interface ITypes {
 
 function Card() {
     const navigate = useNavigate()
-
     const [data, setData] = useState<ITypes[]>([])
-
-    useEffect(() => {
-        async function fetchData() {
-            const res = await axios.get('http://localhost:8001/post')
-            setData(res.data)
-          }
-          fetchData()
-    } , [])
 
     const [search, setSearch] = useState("")
 
@@ -42,10 +33,19 @@ function Card() {
         PostFilteringData.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
     })
+
+    useEffect(() => {
+      async function fetchData() {
+        const res = await axios.get(`http://localhost:8001/post/search/query`,
+        {params: {title: (search)}}
+        )
+        setData(res.data)
+      }
+      fetchData()
+    } , [data])
     
     return (
 <>
-
 <SearchInput placeholder="검색어를 입력하세요" value={search} onChange={onChange} />
 <AiOutlineDelete onClick={onReset} style={{fontSize: '15px', cursor:'pointer', position:'absolute', top:'315px', right:'520px'}} />
 
