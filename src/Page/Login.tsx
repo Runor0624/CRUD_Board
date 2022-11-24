@@ -4,6 +4,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import {Container, Label, Title, LoginButton, LoginInfoBox, LoginInfoText, Input, SignUpText} from '../style/Login'
+import { useRecoilState } from 'recoil';
+import { LoginState } from 'Recoil/Login';
 
 function Login() {
     const navigate = useNavigate()
@@ -12,6 +14,8 @@ function Login() {
         navigate('/signup')
     }
     
+    const [isLoginSuccess, setIsLoginSuccess] = useRecoilState(LoginState)
+
     const [isPasswordTextToggle, setIsPasswordTextToggle] = useState(true)
 
     const toggleHidePassword = () => {
@@ -44,6 +48,7 @@ function Login() {
                 title: '로그인에 성공했어요!',
                 timer:2000
             })
+            setIsLoginSuccess(isLoginSuccess[1].isLoginState)
             window.localStorage.setItem('loginToken', res.data.jwtToken)
             navigate('/')
         })
@@ -53,6 +58,7 @@ function Login() {
                 title: '로그인에 실패했어요!',
                 timer: 2000
             })
+            setIsLoginSuccess(isLoginSuccess[0].isLoginState)
             console.error(error)
         })
 
