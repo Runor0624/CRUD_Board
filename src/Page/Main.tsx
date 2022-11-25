@@ -37,5 +37,9 @@ font-weight: bold;
 position: fixed;
 bottom: 50px;
 right: 10px;
+
+@media screen and (max-width: 768px) {
+    right: 35px;
+  }
 `;
 export default Main 

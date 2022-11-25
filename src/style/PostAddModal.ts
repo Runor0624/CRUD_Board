@@ -12,6 +12,12 @@ position: fixed;
 top: 25%;
 left: 35%;
 z-index: 99999;
+
+@media screen and (max-width: 768px) {
+    position: fixed;
+    left: 7%;
+    height: 45vh;
+  }
 `;
 
 export const Label = styled.label`

@@ -44,6 +44,15 @@ border-bottom: 1px solid #dbdbdb;
 background-color: white;
 position: fixed;
 top: 0px;
+@media screen and (max-width: 768px) {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
 `;
 
 const Logo = styled.h1`
@@ -52,6 +61,10 @@ padding-top: 10px;
 font-size: 20px;
 font-weight: bold;
 cursor: pointer;
+@media screen and (max-width: 768px) {
+    align-self: center;
+    padding-bottom: 20px;
+  }
 `;
 
 const RightBox = styled.div`
@@ -68,6 +81,13 @@ font-weight: bold;
 cursor: pointer;
 padding-top: 10px;
 padding-right: 10px;
+@media screen and (max-width: 768px) {
+    align-self: center;
+    text-align: center;
+    position: fixed;
+    top: 32px;
+    left: 320px;
+  }
 `;
 
 export default Header
