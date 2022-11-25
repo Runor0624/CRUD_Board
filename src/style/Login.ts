@@ -10,7 +10,7 @@ border-radius: 5px;
 margin: auto;
 margin-top: 15vh;
 width: 350px;
-height: 400px;
+height: 450px;
 `;
 
 export const Title = styled.h1`
@@ -32,6 +32,7 @@ text-align: center;
 export const LoginInfoBox = styled.div`
 display: flex;
 flex-direction: column;
+padding-bottom: 20px;
 `;
 
 export const Label = styled.label`
@@ -56,28 +57,25 @@ border-bottom-style: dashed;
 `;
 
 export const LoginButton = styled.button`
-font-size: 16px;
-font-weight: bold;
 width: 300px;
 height: 40px;
+text-align: center;
 align-self: center;
-border: #0095f6;
-border-radius: 5px;
-background-color: initial;
 cursor: pointer;
-
-&:active {
-    background-color: #0095f6;
-}
+border: none;
+border-radius: 5px;
+color: white;
+background-color: #0095f6;
+font-weight: bold;
 
 &:disabled {
     background-color: #0095f6;
-    opacity: 0.4;
+    opacity: 0.5;
 }
 `;
 
 export const SignUpText = styled.p`
-padding-top: 10px;
+padding-top: 40px;
 font-size: 14px;
 font-weight: bold;
 text-align: center;

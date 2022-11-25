@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { useParams } from "react-router-dom"
 import {AiOutlineDelete, AiTwotoneEdit} from 'react-icons/ai'
 import { faker } from "@faker-js/faker"
-import { Container,Image,Title,Text,PriceText,PriceBox,ModifyContainer,CommentAddButton,CommentInput,CommentText,CommentTextTitle } from "style/Detail"
+import { Container,Image,Title,Text,PriceText,PriceBox,ModifyContainer, ButtonGroup, CommentAddButton,CommentInput,CommentText,CommentTextTitle } from "style/Detail"
 import Swal from "sweetalert2"
 
 function Detail() {
@@ -111,9 +111,12 @@ function Detail() {
 
         return (
         <>
+            <ButtonGroup>
+            <AiOutlineDelete onClick={onDeleteButton} />
+            <AiTwotoneEdit  onClick={handleModifyModalControl} />
+            </ButtonGroup>
+
         <Container>
-            <AiOutlineDelete onClick={onDeleteButton} style={{position:'absolute', left: '1050px', top: '60px', cursor:'pointer'}}>삭제</AiOutlineDelete>
-            <AiTwotoneEdit  onClick={handleModifyModalControl} style={{position:'absolute', left: '1080px', top: '60px', cursor:'pointer'}}/>
 
             <Image src={faker.image.city()} alt="City" />
             <Title>{data.title}</Title>
@@ -123,7 +126,7 @@ function Detail() {
 
             <PriceBox>
             <button onClick={MinusPriceCount} disabled={priceCount < 2}>-</button>
-            <input type="number" value={priceCount} />
+            <input type="number" defaultValue={priceCount} />
             <button onClick={PlusPriceCount}>+</button>
             </PriceBox>
 
@@ -136,7 +139,7 @@ function Detail() {
                 )
             })}
 
-                <CommentInput placeholder="댓글을 입력하세요.." name="comment" type="text" value={comment} onChange={onChangeComment} />
+                <CommentInput placeholder="댓글을 입력하세요.." name="comment" type="text" defaultValue={comment} onChange={onChangeComment} />
                 <CommentAddButton type="submit" onClick={onPostCommentAdd}>댓글 게시</CommentAddButton>
             </Container>
 
