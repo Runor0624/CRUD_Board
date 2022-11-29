@@ -17,7 +17,7 @@ border-radius: 5px;
 margin-top: 7px;
 margin-left: 40px;
 width: 400px;
-height: 380px;
+height: 450px;
 
 @media screen and (max-width: 768px) {
     width: 350px;
@@ -27,14 +27,22 @@ height: 380px;
 
 export const Image = styled.img`
 width: 380px;
-height: 200px;
 padding-left: 10px;
 padding-top: 10px;
+object-fit: fill;
 
 @media screen and (max-width: 768px) {
     width: 340px;
     height: 200px;
   }
+`;
+
+export const ImageDemo = styled.img`
+display: block;
+width: 380px;
+padding-left: 10px;
+padding-top: 10px;
+object-fit: fill;
 `;
 
 export const Title = styled.h1`

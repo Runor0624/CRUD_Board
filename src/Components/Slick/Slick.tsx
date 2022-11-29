@@ -1,7 +1,7 @@
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import styled from 'styled-components'
+import { Container, Image } from 'style/Slick'
 
 const Image1 = require('../../Image/1231.png')
 const Image2 = require('../../Image/이미지1.png')
@@ -30,23 +30,4 @@ const Slick = () => {
         </Container>
     )
 }
-const Container = styled.div`
-display: flex;
-flex-direction: column;
-margin-top: 50px;
-@media screen and (max-width: 768px) {
-    margin-top: 65px;
-  }
-`;
-
-const Image = styled.img`
-padding-left: 40px;
-padding-right: 40px;
-width: 600px;
-height: 300px;
-@media screen and (max-width: 768px) {
-    width: 100%;
-    height: 150px;
-  }
-`;
 export default Slick

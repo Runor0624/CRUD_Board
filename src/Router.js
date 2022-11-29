@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import loadable from "@loadable/component";
 import GlobalStyle from 'style/GlobalStyle';
-import Footer from 'Components/Footer/Footer';
 import Header from 'Components/Header/Header';
-import { RecoilRoot } from 'recoil';
+import axios from 'axios';
 
 const MainPage = loadable(() => import('./Page/Main'))
 const DetailPage = loadable(() => import('./Page/Detail'))
@@ -11,11 +10,11 @@ const SignUpPage = loadable(() => import('./Page/SignUp'))
 const LoginPage = loadable(() => import('./Page/Login'))
 const ErrorPage = loadable(() => import('./Page/Error'))
 
+axios.defaults.baseURL = "http://localhost:8001" // 이전 회사에서 사용하던 방법 사용
 
 function Router() {
     return (
-        <>
-        <RecoilRoot>
+       <>
         <GlobalStyle />
         <BrowserRouter>
         <Header />
@@ -27,8 +26,6 @@ function Router() {
             <Route path='*' element={<ErrorPage />} />
         </Routes>
         </BrowserRouter>
-        <Footer />
-        </RecoilRoot>
         </>
     )
 }
