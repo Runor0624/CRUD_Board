@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.form`
 border: 1px solid #dbdbdb;
 border-radius: 5px;
 width: 800px;
 max-height: 1080px;
 height: 600px;
 margin: auto;
-margin-top: 45px;
+margin-top: 25px;
 
 @media screen and (max-width: 768px) {
     display: flex;
@@ -19,26 +19,19 @@ margin-top: 45px;
 
 export const Image = styled.img`
 width: 780px;
-height: 300px;
+object-fit: fill;
 padding-left: 10px;
-padding-top: 40px;
+padding-top: 10px;
 padding-bottom: 10px;
 border-bottom: 1px solid #dbdbdb;
-
-@media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 300px;
-  }
 `;
 
 export const Title = styled.h1`
 font-size: 25px;
 font-weight: bold;
 padding-left: 10px;
-padding-top: 10px;
-padding-bottom: 10px;
+padding-top: 5px;
+padding-bottom: 5px;
 
 @media screen and (max-width: 768px) {
     font-size: 15px;
@@ -78,14 +71,14 @@ input {
 export const Text = styled.p`
 font-size: 18px;
 padding-left: 10px;
-padding-bottom: 10px;
+padding-bottom: 5px;
 
 @media screen and (max-width: 768px) {
     font-size: 11px;
   }
 `;
 
-export const ModifyContainer = styled.div`
+export const ModifyContainer = styled.form`
 display: flex;
 flex-direction: column;
 width: 600px;
@@ -106,22 +99,23 @@ export const CommentInput = styled.input`
 width: 650px;
 height: 25px;
 border-radius: 5px;
-
+z-index: 999999;
 @media screen and (max-width: 768px) {
     display: flex;
     width: 70%;
-    margin-top: 80px;
+    margin-top: 50px;
   }
 `;
 
 export const CommentAddButton = styled.button`
 width: 140px;
 height: 25px;
-padding-top: 72px;
+padding-top: 42px;
 padding-left: 10px;
 border: none;
 background-color: initial;
 font-weight: bold;
+z-index: 999999;
 
 @media screen and (max-width: 768px) {
    width: 30%;

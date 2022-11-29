@@ -5,6 +5,7 @@ import {AiOutlineDelete, AiTwotoneEdit} from 'react-icons/ai'
 import { faker } from "@faker-js/faker"
 import { Container,Image,Title,Text,PriceText,PriceBox,ModifyContainer, ButtonGroup, CommentAddButton,CommentInput,CommentText,CommentTextTitle } from "style/Detail"
 import Swal from "sweetalert2"
+import { useForm } from "react-hook-form"
 
 function Detail() {
     const params = useParams()
@@ -15,6 +16,8 @@ function Detail() {
     const [subDescription, setSubDescription] = useState('')
     const [comment, setComment] = useState('')
     const [priceCount, setPriceCount] = useState(1)
+
+    const {register, handleSubmit} = useForm()
 
     const PlusPriceCount = () => {
         setPriceCount(prevCount => prevCount + 1)
@@ -44,7 +47,7 @@ function Detail() {
 
     const onPostModifySubmit = useCallback((e:React.FormEvent) => {
         e.preventDefault()
-        axios.patch(`http://localhost:8001/post/${params.title}`, {
+        axios.patch(`${axios.defaults.baseURL}/post/${params.title}`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -55,7 +58,7 @@ function Detail() {
         .then((res) => {
             Swal.fire({
                 title: '수정을 성공했어요!',
-            timer: 3000
+                timer: 3000
             })
             window.location.replace(`/${params.title}`)
         })
@@ -72,7 +75,7 @@ function Detail() {
             comment: comment
         }
 
-        axios.post(`http://localhost:8001/comment/${params.title}/comment`, Data)
+        axios.post(`${axios.defaults.baseURL}/comment/${params.title}/comment`, Data)
         .then((response) => {
             Swal.fire({
                 title: '댓글 작성을 성공했어요!',
@@ -85,12 +88,13 @@ function Detail() {
         })
     },[comment])
 
+    const getDetailData = async () => {
+        const res = await axios.get(`${axios.defaults.baseURL}/post/${params.title}`)
+        setData(res.data)
+    }
+
     useEffect(() => {
-        async function fetchData() {
-            const res = await axios(`http://localhost:8001/post/${params.title}`)
-            setData(res.data)
-        }
-        fetchData()
+        getDetailData()
     } , [])
 
     const handleModifyModalControl = () => {
@@ -99,7 +103,7 @@ function Detail() {
 
     const onDeleteButton = () => {
         async function DeleteData() {
-            await axios.delete(`http://localhost:8001/post/${params.title}`)
+            await axios.delete(`${axios.defaults.baseURL}/post/${params.title}`)
         }
         DeleteData()
         Swal.fire({
@@ -117,7 +121,6 @@ function Detail() {
             </ButtonGroup>
 
         <Container>
-
             <Image src={faker.image.city()} alt="City" />
             <Title>{data.title}</Title>
             <Text>{data.description}</Text>
@@ -143,19 +146,19 @@ function Detail() {
                 <CommentAddButton type="submit" onClick={onPostCommentAdd}>댓글 게시</CommentAddButton>
             </Container>
 
-            {isModifyModal === true ?
-            <ModifyContainer>
+            {isModifyModal === true &&
+            <ModifyContainer onSubmit={handleSubmit(() => onPostModifySubmit)}>
                 <label>설명</label>
-                <input name='description' type='text' onChange={onChangeDescription} tabIndex={2}/>
+                <input {...register('description', {minLength: {value: 3, message:'3자 이상 입력하시오!'}})} type='text' onChange={onChangeDescription} tabIndex={2}/>
     
                 <label>추가 설명</label>
-                <input name='subDescription' type='text' onChange={onChangeSubDescription} tabIndex={3} />
+                <input {...register('subDescription', {minLength: {value: 3, message:'3자 이상 입력하시오!'}})} type='text' onChange={onChangeSubDescription} tabIndex={3} />
     
                 <label>가격</label>
-                <input name='price' type='number' onChange={onChangePrice} tabIndex={4}/>
+                <input {...register('price', {minLength: {value: 3, message:'3자 이상 입력하시오!'}})} type='number' onChange={onChangePrice} tabIndex={4}/>
                 <button type="submit" onClick={onPostModifySubmit}>게시</button>
             </ModifyContainer>
-            :<></>}
+            }
         </>
     )
 }
